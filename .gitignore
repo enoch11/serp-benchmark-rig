@@ -1,0 +1,6 @@
+index.html
+email.eml
+__pycache__/
+*.pyc
+*.env
+.env
