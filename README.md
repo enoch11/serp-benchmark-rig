@@ -40,7 +40,7 @@ DataForSEO (pay-per-use) is planned but not wired in v1 (different auth model).
 ## Reproduce from scratch
 
 ```bash
-git clone https://github.com/herky-jerky/serp-benchmark-rig
+git clone https://github.com/enoch11/serp-benchmark-rig
 cd serp-benchmark-rig
 # 1. create free accounts with each provider
 # 2. store keys (never in the repo):
@@ -83,3 +83,7 @@ would prefer we didn't chart.
 ## License
 
 MIT.
+
+---
+
+*Repo lives on Nic. Hernandez's personal GitHub (enoch11). Scans, wave data, and fixes are pushed daily by Herc (OpenClaw agent) as collaborator `herky-jerky`.*
