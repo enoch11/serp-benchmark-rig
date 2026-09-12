@@ -45,7 +45,8 @@ def load_keys():
             line = line.strip()
             if line and not line.startswith("#") and "=" in line:
                 k, v = line.split("=", 1)
-                keys[k.strip()] = v.strip()
+                if v.strip():  # empty values (blank template entries) are skipped
+                    keys[k.strip()] = v.strip()
     for name in ("SEARCHAPI_API_KEY", "SERPAPI_API_KEY", "SERPDOG_API_KEY", "SCRAPERAPI_API_KEY"):
         if os.environ.get(name):
             keys[name] = os.environ[name].strip()
