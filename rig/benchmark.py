@@ -47,7 +47,7 @@ def load_keys():
                 k, v = line.split("=", 1)
                 if v.strip():  # empty values (blank template entries) are skipped
                     keys[k.strip()] = v.strip()
-    for name in ("SEARCHAPI_API_KEY", "SERPAPI_API_KEY", "SERPDOG_API_KEY", "SCRAPERAPI_API_KEY"):
+    for name in ("SEARCHAPI_API_KEY", "SERPAPI_API_KEY", "SERPDOG_API_KEY", "ZENSERP_API_KEY", "SCRAPERAPI_API_KEY"):
         if os.environ.get(name):
             keys[name] = os.environ[name].strip()
     return keys
@@ -110,6 +110,13 @@ PROVIDERS = {
         "url": lambda key, q: "https://api.serpdog.io/search?" + urllib.parse.urlencode(
             google_common({"api_key": key, "q": q})),
         "extract": lambda p: _organics(p, "organic_results"),
+        # dropped 9/12: serpdog.io 403s behind Cloudflare (site unusable); kept for historic waves
+    },
+    "zenserp": {
+        "env": "ZENSERP_API_KEY",
+        "url": lambda key, q: "https://app.zenserp.com/api/v2/search?" + urllib.parse.urlencode(
+            google_common({"apikey": key, "q": q})),
+        "extract": lambda p: _organics(p, "organic"),
     },
     "scraperapi": {
         "env": "SCRAPERAPI_API_KEY",
@@ -179,7 +186,7 @@ def run_one(provider, key, qclass, query, attempt):
 def main():
     ap = argparse.ArgumentParser(description="SERP API benchmark rig")
     ap.add_argument("--wave", type=int, required=True)
-    ap.add_argument("--providers", default="searchapi,serpapi,serpdog,scraperapi",
+    ap.add_argument("--providers", default="searchapi,serpapi,zenserp,scraperapi",
                     help="comma-separated subset")
     ap.add_argument("--repeats", type=int, default=2, help="runs per query (quota math in README)")
     ap.add_argument("--outdir", default=str(ROOT / "data"))
