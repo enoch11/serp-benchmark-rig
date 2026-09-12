@@ -16,7 +16,7 @@ compiled.
 |---|---|
 | SearchApi | free trial |
 | SerpApi | free tier (~100 searches/mo) |
-| Serpdog | free tier |
+| Zenserp | free tier |
 | ScraperAPI | free trial (1,000 credits) |
 
 DataForSEO (pay-per-use) is planned but not wired in v1 (different auth model).
@@ -47,7 +47,7 @@ cd serp-benchmark-rig
 cat > ~/.config/serp-rig.env <<'EOF'
 SEARCHAPI_API_KEY=...
 SERPAPI_API_KEY=...
-SERPDOG_API_KEY=...
+ZENSERP_API_KEY=...
 SCRAPERAPI_API_KEY=...
 EOF
 chmod 600 ~/.config/serp-rig.env
@@ -62,7 +62,7 @@ Outputs: `data/wave_<N>/<provider>/*.json` (raw responses) and
 
 Default is 2 repeats × 20 queries = 40 calls/provider/wave. SerpApi's free tier is
 ~100/month, so three full waves exhaust it — for waves 2–3 either run
-`--providers searchapi,serpdog,scraperapi --repeats 1`, or accept the upgrade. We
+`--providers searchapi,zenserp,scraperapi --repeats 1`, or accept the upgrade. We
 note every quota decision in results.md rather than quietly skipping calls.
 
 ## Limitations (read before quoting any number here)
