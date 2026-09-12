@@ -120,10 +120,10 @@ PROVIDERS = {
     },
     "scraperapi": {
         "env": "SCRAPERAPI_API_KEY",
-        # ScraperAPI structured Google endpoint
-        "url": lambda key, q: "https://api.scraperapi.com/?" + urllib.parse.urlencode(
-            google_common({"api_key": key, "q": q, "google_domain": "google.com", "output": "json"})),
-        "extract": lambda p: _organics(p, "organic_results", "results"),
+        # ScraperAPI structured Google endpoint (current API, per docs 2026-09-12)
+        "url": lambda key, q: "https://api.scraperapi.com/structured/google/search?" + urllib.parse.urlencode(
+            google_common({"api_key": key, "query": q, "country_code": "us", "tld": "com"})),
+        "extract": lambda p: _organics(p, "organic_results", "organic", "results"),
     },
 }
 
